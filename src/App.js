@@ -28,8 +28,8 @@ class App extends Component {
       }
     );
   }
-
-  render() {
+// put your conditional logic in a helper function then return it, dont put all this logic in the render
+  renderContent() {
     // this is conditional rendering and you need to use it often
     // if our error mesage  and no latitude
     if (this.state.errorMessage && !this.state.lat) {
@@ -38,7 +38,15 @@ class App extends Component {
     if (!this.state.errorMessage && this.state.lat) {
       return <SeasonDisplay lat={this.state.lat} />;
     }
-    return <Loader message='please enable your location' />;
+    return <Loader message="please enable your location" />;
+  }
+
+  render() {
+    return (
+    <div>
+      {this.renderContent()}
+      </div>
+    )
   }
 }
 
