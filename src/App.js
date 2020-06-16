@@ -1,29 +1,43 @@
 import React, { Component } from "react";
+import SeasonDisplay from './Components/SeasonDisplay';
 
 class App extends Component {
+  // constructor function, initalizing state
   constructor(props) {
     super(props);
+    this.state = { lat: null, errorMessage: "" };
+  }
 
-    this.state = { lat: null };
+// this is another way to initalize state without constructor
+// state = {lat: null, errorMessage: ""};
 
+
+// getting location api and api location and error message
+  componentDidMount() {
     // MDN geolocation api-current location
     navigator.geolocation.getCurrentPosition(
       // success callback that gets called when it goes right
       (position) => {
         // got this info from the console for gelocation info with a console.log
         // and we called setState here to do it
-        this.setState({lat: position.coords.latitude });
+        this.setState({ lat: position.coords.latitude });
       },
       // failure callback when it cant get location
       (err) => {
-        alert("please refresh page and allow location");
+        this.setState({ errorMessage: err.message });
       }
     );
   }
 
   render() {
-    // reference the state below for the latitude
-    return <div>Latitude: {this.state.lat}</div>;
+    // this is conditional rendering and you need to use it often
+    // if our error mesage  and no latitude
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error:{this.state.errorMessage}</div>;
+    }
+    if (!this.state.errorMessage && this.state.lat) {
+      return <SeasonDisplay lat={this.state.lat}/>
+    } else return <div>Loading...</div>;
   }
 }
 
