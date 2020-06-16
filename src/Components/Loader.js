@@ -3,14 +3,20 @@ import React from 'react';
 
 
 // make it a functional component
-
-const Loader = () => {
+// {{message}} is another way of destructuring props
+const Loader = ({message}) => {
     return(
   <div className="ui active dimmer">
     <div className="ui big text loader">
-        Loading...
+        {message}
     </div>
   </div>
     )
 }
+
+Loader.defaultProps = {
+    message: 'Loading...'
+}
+
+
 export default Loader;
