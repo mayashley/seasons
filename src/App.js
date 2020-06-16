@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import './App.css'
 import SeasonDisplay from "./Components/SeasonDisplay";
 import Loader from "./Components/Loader";
-
+// class based component
 class App extends Component {
   // constructor function, initalizing state
   constructor(props) {
@@ -43,7 +44,7 @@ class App extends Component {
 
   render() {
     return (
-    <div>
+    <div className='border-box'>
       {this.renderContent()}
       </div>
     )
