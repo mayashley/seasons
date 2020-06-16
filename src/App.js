@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import SeasonDisplay from './Components/SeasonDisplay';
+import SeasonDisplay from "./Components/SeasonDisplay";
+import Loader from "./Components/Loader";
 
 class App extends Component {
   // constructor function, initalizing state
@@ -8,11 +9,10 @@ class App extends Component {
     this.state = { lat: null, errorMessage: "" };
   }
 
-// this is another way to initalize state without constructor
-// state = {lat: null, errorMessage: ""};
+  // this is another way to initalize state without constructor
+  // state = {lat: null, errorMessage: ""};
 
-
-// getting location api and api location and error message
+  // getting location api and api location and error message
   componentDidMount() {
     // MDN geolocation api-current location
     navigator.geolocation.getCurrentPosition(
@@ -36,8 +36,9 @@ class App extends Component {
       return <div>Error:{this.state.errorMessage}</div>;
     }
     if (!this.state.errorMessage && this.state.lat) {
-      return <SeasonDisplay lat={this.state.lat}/>
-    } else return <div>Loading...</div>;
+      return <SeasonDisplay lat={this.state.lat} />;
+    }
+    return <Loader />;
   }
 }
 
